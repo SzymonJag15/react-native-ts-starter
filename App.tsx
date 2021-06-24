@@ -1,5 +1,6 @@
 import React from 'react';
 import {Button, StyleSheet, Text, View} from 'react-native';
+import Fitness from '@ovalmoney/react-native-fitness';
 
 export type Props = {
   name: string;
@@ -14,6 +15,17 @@ const App: React.FC<Props> = ({name, baseEnthusiasmLevel = 0}) => {
   name = 'Test';
 
   const getExclamationMarks = (numChars: number) => numChars > 0 ? Array(numChars + 1).join('!') : '';
+
+  const permissions = [
+    { kind: Fitness.PermissionKinds.Steps, access: Fitness.PermissionAccesses.Write },
+  ];
+
+  Fitness.isAuthorized(permissions).then((authorized) => {
+    alert(`error false: ${authorized}`)
+  })
+  .catch((error) => {
+    alert(`error false: ${error}`)
+  });
 
   return (
     <View style={styles.container}>
